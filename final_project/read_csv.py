@@ -41,7 +41,7 @@ plt.show()
 
 
 # Plot 3 - Scatterplot of average faculty salary vs 
-odf_scatter = df
+df_scatter = df
 df_scatter = df_scatter[df_scatter['ACCREDAGENCY'].isnull() == False]
 df_scatter = df_scatter[df_scatter['CONTROL'] == 1]
 df_scatter = df_scatter[df_scatter['STABBR'].isin(['NY', 'PA','DE','VA','NJ','CT','RI','MA'])]
