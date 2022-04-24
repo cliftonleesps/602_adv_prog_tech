@@ -2,6 +2,7 @@ import pandas as pd
 import sqlalchemy
 import seaborn as sns
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 import numpy as np
 
 def filter_non_numeric(dataframe, convert_columns):
@@ -28,7 +29,7 @@ result = df_states.groupby(['STABBR'])['STABBR'].size().sort_values(ascending=Tr
 seaborn.despine(fig=None, ax=None, top=True, right=True, left=False, bottom=False, offset=None, trim=False)¶
 
 # Plot 1 - Barplot by states
-sns.set_theme()
+sns.set_theme() #style="whitegrid", palette="pastel")
 barplot = sns.barplot(x = result.index, y = result.values)
 barplot.set_xlabel("States",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
 barplot.set_ylabel("Number of Colleges", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
@@ -45,8 +46,25 @@ df_histogram['ROOMBOARD_ON'] = df_histogram['ROOMBOARD_ON'].fillna(0)
 # filter out rows with empty tuition
 df_histogram = df_histogram[df_histogram['TUITIONFEE_IN'].isna() == False]
 
+def numfmt(x, pos): # your custom formatter function: divide by 100.0
+    s = '{}k'.format(x / 1000)
+    return s
+
+import matplotlib.ticker as tkr     # has classes for tick-locating and -formatting
+xfmt = tkr.FuncFormatter(numfmt)    # create your custom formatter function
+
+
+
+
 # Plot 2 - histogram of in state tuition
-sns.histplot(data=df_histogram, x="TUITIONFEE_IN")
+sns.set_theme(style="whitegrid", palette="pastel",rc={"axes.spines.left": False, "axes.spines.right": False, "axes.spines.top": False})
+histogram = sns.histplot(data=df_histogram,bins=50, x="TUITIONFEE_IN", color="lightgreen")
+histogram.set_xlabel("Tuition",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
+histogram.set_ylabel("Frequency", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
+histogram.set_title('Public College Tuition for Select States', fontdict= { 'fontsize': 16, 'fontweight':'bold'})
+histogram.xaxis.grid(False) 
+#histogram.xaxis.set_major_formatter(mpl.ticker.StrMethodFormatter('{x:.0f}k'))
+histogram.xaxis.set_major_formatter(xfmt)
 plt.show()
 
 
