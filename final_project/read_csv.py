@@ -12,7 +12,8 @@ def filter_non_numeric(dataframe, convert_columns):
     return dataframe
 
 
-df = pd.read_csv("https://raw.githubusercontent.com/cliftonleesps/602_adv_prog_tech/main/final_project/df_out.csv")
+#df = pd.read_csv("https://raw.githubusercontent.com/cliftonleesps/602_adv_prog_tech/main/final_project/df_out.csv")
+df = pd.read_csv("df_out.csv")
 
 
 df_states = df
@@ -22,11 +23,20 @@ df_states = df_states[df_states['STABBR'].isin(['NY', 'PA','DE','VA','NJ','CT','
 df_states = df_states[['STABBR']]
 
 
-result = df_states.groupby(['STABBR'])['STABBR'].size()
+# Group by states, sort by count
+result = df_states.groupby(['STABBR'])['STABBR'].size().sort_values(ascending=True)
+seaborn.despine(fig=None, ax=None, top=True, right=True, left=False, bottom=False, offset=None, trim=False)¶
 
 # Plot 1 - Barplot by states
-sns.barplot(x = result.index, y = result.values)
+sns.set_theme()
+barplot = sns.barplot(x = result.index, y = result.values)
+barplot.set_xlabel("States",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
+barplot.set_ylabel("Number of Colleges", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
+barplot.set_title('Public Colleges in Select States', fontdict= { 'fontsize': 16, 'fontweight':'bold'})
+barplot.bar_label(barplot.containers[0])
+
 plt.show()
+
 
 # clean up the roomboard column
 df_histogram = df
