@@ -12,7 +12,7 @@ def filter_non_numeric(dataframe, convert_columns):
     return dataframe
 
 
-df = pd.read_csv("df_out.csv")
+df = pd.read_csv("https://raw.githubusercontent.com/cliftonleesps/602_adv_prog_tech/main/final_project/df_out.csv")
 
 
 df_states = df
