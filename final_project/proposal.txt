@@ -1,0 +1,47 @@
+Overview
+
+With the dramatically rising cost of higher education, parents have to make difficult decisions regarding their children's options. Some reports show the cost of sending a single student to a four year in-state college is about $25k a year with an annual growth rate of 6.8%. Of course, parents and students can obtain both federal and personal loans to help cover tuition but it's still common for students to leave school with a a significant amount of debt before entering the work force.
+
+As such, parents have to judge any prospective college on several important criteria: the quality of education; typical amount of loans (and financial aid); availability of marketable skills; employability post graduation. Additionally, parents ask themselves other questions such as, 'should a student go to a more well known university at all costs? Will they be able to pay off the loans within a reasonable amount of time?'
+
+
+Research Question
+
+In this study, I will attempt to analyze college data from the Department of Education to answer one question: what public, four year institution has the highest earning graduates with the lowest debt in the field of computer science? Furthermore, which college in the North East qualifies with the above criteria?
+
+
+Motivation
+
+As a parent of children heading to college in the next several years, I've had two realizations: college is not very far away; the costs are ever rising at a faster pace. When I attended a state school for college, the tuition was covered with Pell and state grants with a small amount left over for loans. However, with colleges adding more well known names to their faculty and also improving student amenities, the age has passed where a single grant can help cover more than a low percentage of costs.
+
+Obviously, this study represents a personal journey to acclimate myself to the process of selecting an appropriate college for my children academically without running the risk of a untenable financial loan.
+
+
+
+Data Sources
+
+The main source of data is from the U.S. Department of Education College Scorecard website (https://collegescorecard.ed.gov/data). This site has institutional data (each institution is the primary key), fields of study data as well as a data dictionary to assist with interpretation.
+
+College data sets are in two downloadable CSV files:
+
+  # Records  Filename
+  224850     Most-Recent-Cohorts-Field-of-Study.csv
+    6695     Most-Recent-Cohorts-Institution.csv
+
+So, this project will explore about 231k records in total.
+
+
+Approach (and Python Libraries)
+
+Obviously, the DOE will have hopefully tidied up the data as much as possible but it will still need to be further manipulated so it will be usable in Python. So, the typical libraries will be used (Numpy and Pandas) for data frame processing.  Addtionally, plots for colleges will also be useful so Matplotlib or Seaborn will be imported as well.
+
+
+EDA & summary statistics
+
+A cursory glance of the data shows among all colleges:
+
+ * 6347 accredited colleges
+ * The median amount of debt for all programs: $9500
+ * The median earnings post college: $37,078
+
+

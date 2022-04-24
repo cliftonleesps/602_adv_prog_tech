@@ -1,0 +1,2 @@
+primary key (UNITID)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;

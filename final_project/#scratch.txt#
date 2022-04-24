@@ -1,0 +1,3 @@
+select count(*) from file1 join file4 on file1.UNITID = file4.UNITID where STABBR in ('NY', 'PA','DE','VA','NJ','CT',"RI","MA") AND SCHTYPE = 1 and ACCREDAGENCY not in ("NULL", "EXEMPT"); 
+
+select count(*), STABBR from file1 join file4 on file1.UNITID = file4.UNITID where STABBR in ('NY', 'PA','DE','VA','NJ','CT',"RI","MA") AND SCHTYPE = 1 and ACCREDAGENCY not in ("NULL", "EXEMPT") group by STABBR; 
