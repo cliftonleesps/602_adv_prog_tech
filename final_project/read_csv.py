@@ -29,7 +29,7 @@ df_states = df_states[['STABBR']]
 result = df_states.groupby(['STABBR'])['STABBR'].size().sort_values(ascending=True)
 seaborn.despine(fig=None, ax=None, top=True, right=True, left=False, bottom=False, offset=None, trim=False)¶
 
-# Plot 1 - Barplot by states
+# Plot 1 - Barplot by states (Seaborn)
 sns.set_theme() #style="whitegrid", palette="pastel")
 barplot = sns.barplot(x = result.index, y = result.values)
 barplot.set_xlabel("States",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
@@ -38,6 +38,24 @@ barplot.set_title('Public Colleges in Select States', fontdict= { 'fontsize': 16
 barplot.bar_label(barplot.containers[0])
 
 plt.show()
+
+# Plot 1 - Barplot by states (Matplotlib)
+bars = plt.bar(result.index, result.values, color=['blue','burlywood', 'seagreen', 'indianred', 'slateblue', 'sienna', 'orchid', 'grey'])
+plt.bar_label(bars)
+plt.title("Public Colleges in Select States", fontdict= { 'fontsize': 16, 'fontweight':'bold'}, loc='center')
+plt.xlabel("States",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
+plt.ylabel("Number of Colleges", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
+
+# grids
+ax = plt.gca()
+ax.yaxis.grid(True)
+ax.xaxis.grid(False)
+
+plt.show()
+
+
+
+
 
 
 # clean up the roomboard column
