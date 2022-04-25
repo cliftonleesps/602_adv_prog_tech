@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import numpy as np
 import matplotlib.ticker as tkr
+from matplotlib.axis import Axis
 
 def filter_non_numeric(dataframe, convert_columns):
     for c in convert_columns:
@@ -57,7 +58,6 @@ plt.show()
 
 
 
-
 # clean up the roomboard column
 df_histogram = df
 df_histogram['ROOMBOARD_ON'] = df_histogram['ROOMBOARD_ON'].fillna(0)
@@ -74,7 +74,7 @@ xfmt = tkr.FuncFormatter(numfmt)
 
 
 
-# Plot 2 - histogram of in state tuition
+# Plot 2 - histogram of in state tuition (Seaborn)
 sns.set_theme(style="whitegrid", palette="pastel",rc={"axes.spines.left": False, "axes.spines.right": False, "axes.spines.top": False})
 histogram = sns.histplot(data=df_histogram,bins=50, x="TUITIONFEE_IN", color="lightgreen")
 histogram.set_xlabel("Tuition",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
@@ -83,6 +83,25 @@ histogram.set_title('Public College Tuition for Select States', fontdict= { 'fon
 histogram.xaxis.grid(False) 
 histogram.xaxis.set_major_formatter(xfmt)
 plt.show()
+
+
+# Plot 2 - histogram of in state tuition (Matplotlib)
+fig, ax = plt.subplots()
+plt.hist(df_histogram['TUITIONFEE_IN'], bins=50, color="lightgreen")
+plt.title("Public Colleges Tuition for Select States", fontdict= { 'fontsize': 16, 'fontweight':'bold'}, loc='center')
+plt.xlabel("Tuition",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
+plt.ylabel("Frequency", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
+Axis.set_major_formatter(ax.xaxis, xfmt)
+# grids
+ax = plt.gca()
+ax.yaxis.grid(True)
+ax.xaxis.grid(False)
+
+plt.show()
+
+
+
+
 
 
 # Plot 3 - Scatterplot of average faculty salary vs 
