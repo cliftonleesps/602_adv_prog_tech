@@ -4,6 +4,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 import numpy as np
+import matplotlib.ticker as tkr
 
 def filter_non_numeric(dataframe, convert_columns):
     for c in convert_columns:
@@ -46,12 +47,11 @@ df_histogram['ROOMBOARD_ON'] = df_histogram['ROOMBOARD_ON'].fillna(0)
 # filter out rows with empty tuition
 df_histogram = df_histogram[df_histogram['TUITIONFEE_IN'].isna() == False]
 
-def numfmt(x, pos): # your custom formatter function: divide by 100.0
-    s = '{}k'.format(x / 1000)
+def numfmt(x, pos):
+    s = '{}k'.format(int(x / 1000))
     return s
 
-import matplotlib.ticker as tkr     # has classes for tick-locating and -formatting
-xfmt = tkr.FuncFormatter(numfmt)    # create your custom formatter function
+xfmt = tkr.FuncFormatter(numfmt)
 
 
 
@@ -63,7 +63,6 @@ histogram.set_xlabel("Tuition",  fontdict= { 'fontsize': 12, 'fontweight':'bold'
 histogram.set_ylabel("Frequency", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
 histogram.set_title('Public College Tuition for Select States', fontdict= { 'fontsize': 16, 'fontweight':'bold'})
 histogram.xaxis.grid(False) 
-#histogram.xaxis.set_major_formatter(mpl.ticker.StrMethodFormatter('{x:.0f}k'))
 histogram.xaxis.set_major_formatter(xfmt)
 plt.show()
 
@@ -76,8 +75,17 @@ df_scatter = df_scatter[df_scatter['STABBR'].isin(['NY', 'PA','DE','VA','NJ','CT
 df_scatter = df_scatter[df_scatter['AVGFACSAL'].isna() == False]
 df_scatter = df_scatter[df_scatter['NPT4_PUB'].isna() == False]
 
-sns.scatterplot(data=df_scatter, x="AVGFACSAL", y="NPT4_PUB", hue="STABBR")
+scatterplot = sns.scatterplot(data=df_scatter, x="AVGFACSAL", y="NPT4_PUB", hue="STABBR")
+scatterplot.set_xlabel("Faculty Salary Per Month",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
+scatterplot.set_ylabel("Net College Price Per Year ", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
+scatterplot.set_title('Average Net College Price Compared to Average Monthly Teaching Salaries', fontdict= { 'fontsize': 16, 'fontweight':'bold'})
+scatterplot.xaxis.set_major_formatter(xfmt)
+scatterplot.yaxis.set_major_formatter(xfmt)
+plt.legend(bbox_to_anchor=(1.02, 1), loc='upper left', borderaxespad=0)
 plt.show()
+
+
+
 
 
 
@@ -99,11 +107,29 @@ plt.title('Median Costs of College')
 plt.xlabel('College Type')
 plt.show()
 
+
+df_cost_sea = df_cost_chart.copy()
+df_cost_sea['Book'] = df_cost_sea['Book'] + df_cost_sea['Tuition (In State)']
+df_cost_sea['Dorm'] = df_cost_sea['Dorm'] + df_cost_sea['Book']
+df_cost_sea['Other'] = df_cost_sea['Other'] + df_cost_sea['Dorm']
+
+
+
+
 # Seaborn bar chart
-sns.barplot(data=df_cost_chart, x=['Public','Private nonprofit','Private for-profit'], y="Tuition (In State)", color='darksalmon')
-sns.barplot(data=df_cost_chart, x=['Public','Private nonprofit','Private for-profit'], y="Dorm", color='lightgrey')
-sns.barplot(data=df_cost_chart, x=['Public','Private nonprofit','Private for-profit'], y="Other", color='darkblue')
-sns.barplot(data=df_cost_chart, x=['Public','Private nonprofit','Private for-profit'], y="Book", color='lightblue')
+
+sns.barplot(data=df_cost_sea, x=['Public','Private nonprofit','Private for-profit'], y="Other", color='gray')
+sns.barplot(data=df_cost_sea, x=['Public','Private nonprofit','Private for-profit'], y="Dorm", color='green')
+sns.barplot(data=df_cost_sea, x=['Public','Private nonprofit','Private for-profit'], y="Book", color='skyblue')
+b = sns.barplot(data=df_cost_sea, x=['Public','Private nonprofit','Private for-profit'], y="Tuition (In State)", color='orange')
+
+b.set_xlabel("College Type",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
+b.set_ylabel("Cost ", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
+b.set_title('Median Cost of College', fontdict= { 'fontsize': 16, 'fontweight':'bold'})
+b.yaxis.set_major_formatter(xfmt)
+b.xaxis.grid(False)
+b.yaxis.grid(True) 
+plt.legend(labels=["Legend_Day1","Legend_Day2"], loc = 2, bbox_to_anchor = (0.85,1))
 
 plt.show()
 
