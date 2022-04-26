@@ -102,9 +102,7 @@ plt.show()
 
 
 
-
-
-# Plot 3 - Scatterplot of average faculty salary vs 
+# Plot 3 - Scatterplot of average faculty salary vs net price (Seaborn)
 df_scatter = df
 df_scatter = df_scatter[df_scatter['ACCREDAGENCY'].isnull() == False]
 df_scatter = df_scatter[df_scatter['CONTROL'] == 1]
@@ -119,6 +117,11 @@ scatterplot.set_title('Average Net College Price Compared to Average Monthly Tea
 scatterplot.xaxis.set_major_formatter(xfmt)
 scatterplot.yaxis.set_major_formatter(xfmt)
 plt.legend(bbox_to_anchor=(1.02, 1), loc='upper left', borderaxespad=0)
+plt.show()
+
+
+# Plot 3 - Scatterplot of average faculty salary vs net price (Matplotlib)
+plt.scatter(df_scatter["AVGFACSAL"], df_scatter["NPT4_PUB"], s=10)
 plt.show()
 
 
