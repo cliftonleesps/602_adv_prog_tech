@@ -5,8 +5,9 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import numpy as np
 import matplotlib.ticker as tkr
-from matplotlib.axis import Axis
 import matplotlib.patches as mpatches
+from matplotlib.axis import Axis
+
 
 def filter_non_numeric(dataframe, convert_columns):
     for c in convert_columns:
@@ -93,135 +94,10 @@ plt.title("Public Colleges Tuition for Select States", fontdict= { 'fontsize': 1
 plt.xlabel("Tuition",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
 plt.ylabel("Frequency", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
 Axis.set_major_formatter(ax.xaxis, xfmt)
-Axis.sns.despine(fig=None, ax=None, top=True, right=True, left=False, bottom=False, offset=None, trim=False)
-
-# Plot 1 - Barplot by states (Seaborn)
-sns.set_theme() #style="whitegrid", palette="pastel")
-barplot = sns.barplot(x = result.index, y = result.values)
-barplot.set_xlabel("States",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
-barplot.set_ylabel("Number of Colleges", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
-barplot.set_title('Public Colleges in Select States', fontdict= { 'fontsize': 16, 'fontweight':'bold'})
-barplot.bar_label(barplot.containers[0])
-
-plt.show()
-
-# Plot 1 - Barplot by states (Matplotlib)
-bars = plt.bar(result.index, result.values, color=['blue','burlywood', 'seagreen', 'indianred', 'slateblue', 'sienna', 'orchid', 'grey'])
-plt.bar_label(bars)
-plt.title("Public Colleges in Select States", fontdict= { 'fontsize': 16, 'fontweight':'bold'}, loc='center')
-plt.xlabel("States",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
-plt.ylabel("Number of Colleges", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
-
-# grids
-ax = plt.gca()
-ax.yaxis.grid(True)
-ax.xaxis.grid(False)
-
-plt.show()
-
-
-
-
-
-# clean up the roomboard column
-df_histogram = df
-df_histogram['ROOMBOARD_ON'] = df_histogram['ROOMBOARD_ON'].fillna(0)
-
-# filter out rows with empty tuition
-df_histogram = df_histogram[df_histogram['TUITIONFEE_IN'].isna() == False]
-
-def numfmt(x, pos):
-    s = '{}k'.format(int(x / 1000))
-    return s
-
-xfmt = tkr.FuncFormatter(numfmt)
-
-
-
-
-# Plot 2 - histogram of in state tuition (Seaborn)
-sns.set_theme(style="whitegrid", palette="pastel",rc={"axes.spines.left": False, "axes.spines.right": False, "axes.spines.top": False})
-histogram = sns.histplot(data=df_histogram,bins=50, x="TUITIONFEE_IN", color="lightgreen")
-histogram.set_xlabel("Tuition",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
-histogram.set_ylabel("Frequency", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
-histogram.set_title('Public College Tuition for Select States', fontdict= { 'fontsize': 16, 'fontweight':'bold'})
-histogram.xaxis.grid(False) 
-histogram.xaxis.set_major_formatter(xfmt)
-plt.show()
-
-
-# Plot 2 - histogram of in state tuition (Matplotlib)
-fig, ax = plt.subplots()
-plt.hist(df_histogram['TUITIONFEE_IN'], bins=50, color="lightgreen")
-plt.title("Public Colleges Tuition for Select States", fontdict= { 'fontsize': 16, 'fontweight':'bold'}, loc='center')
-plt.xlabel("Tuition",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
-plt.ylabel("Frequency", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
-Axis.set_major_formatter(ax.xaxis, xfmt)
-Axis.sns.despine(fig=None, ax=None, top=True, right=True, left=False, bottom=False, offset=None, trim=False)
-
-# Plot 1 - Barplot by states (Seaborn)
-sns.set_theme() #style="whitegrid", palette="pastel")
-barplot = sns.barplot(x = result.index, y = result.values)
-barplot.set_xlabel("States",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
-barplot.set_ylabel("Number of Colleges", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
-barplot.set_title('Public Colleges in Select States', fontdict= { 'fontsize': 16, 'fontweight':'bold'})
-barplot.bar_label(barplot.containers[0])
-
-plt.show()
-
-# Plot 1 - Barplot by states (Matplotlib)
-bars = plt.bar(result.index, result.values, color=['blue','burlywood', 'seagreen', 'indianred', 'slateblue', 'sienna', 'orchid', 'grey'])
-plt.bar_label(bars)
-plt.title("Public Colleges in Select States", fontdict= { 'fontsize': 16, 'fontweight':'bold'}, loc='center')
-plt.xlabel("States",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
-plt.ylabel("Number of Colleges", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
-
-# grids
-ax = plt.gca()
-ax.yaxis.grid(True)
-ax.xaxis.grid(False)
-
-plt.show()
-
-
-
-
-
-# clean up the roomboard column
-df_histogram = df
-df_histogram['ROOMBOARD_ON'] = df_histogram['ROOMBOARD_ON'].fillna(0)
-
-# filter out rows with empty tuition
-df_histogram = df_histogram[df_histogram['TUITIONFEE_IN'].isna() == False]
-
-def numfmt(x, pos):
-    s = '{}k'.format(int(x / 1000))
-    return s
-
-xfmt = tkr.FuncFormatter(numfmt)
-
-
-
-
-# Plot 2 - histogram of in state tuition (Seaborn)
-sns.set_theme(style="whitegrid", palette="pastel",rc={"axes.spines.left": False, "axes.spines.right": False, "axes.spines.top": False})
-histogram = sns.histplot(data=df_histogram,bins=50, x="TUITIONFEE_IN", color="lightgreen")
-histogram.set_xlabel("Tuition",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
-histogram.set_ylabel("Frequency", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
-histogram.set_title('Public College Tuition for Select States', fontdict= { 'fontsize': 16, 'fontweight':'bold'})
-histogram.xaxis.grid(False) 
-histogram.xaxis.set_major_formatter(xfmt)
-plt.show()
-
-
-# Plot 2 - histogram of in state tuition (Matplotlib)
-fig, ax = plt.subplots()
-plt.hist(df_histogram['TUITIONFEE_IN'], bins=50, color="lightgreen")
-plt.title("Public Colleges Tuition for Select States", fontdict= { 'fontsize': 16, 'fontweight':'bold'}, loc='center')
-plt.xlabel("Tuition",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
-plt.ylabel("Frequency", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
-Axis.set_major_formatter(ax.xaxis, xfmt)
-# grids
+ax.spines['right'].set_visible(False)
+ax.spines['top'].set_visible(False)
+ax.spines['left'].set_visible(False)
+ax.spines['bottom'].set_visible(True)
 ax = plt.gca()
 ax.yaxis.grid(True)
 ax.xaxis.grid(False)
@@ -302,16 +178,22 @@ df_cost_chart = pd.DataFrame( { 'Tuition (In State)' : [df_control1['TUITIONFEE_
 # Matplot lib bar chart
 df_cost_chart.plot(kind='bar', stacked=True, color=['orange', 'skyblue', 'green', 'gray'])
 plt.xticks(rotation=0)
-plt.title('Median Costs of College')
-plt.xlabel('College Type')
+plt.title('Median Costs of College',fontdict= { 'fontsize': 16, 'fontweight':'bold'}, loc='center')
+plt.xlabel('College Type', fontdict= { 'fontsize': 12, 'fontweight':'bold'})
+plt.ylabel("Cost", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
+Axis.set_major_formatter(ax.yaxis, xfmt)
+
+ax = plt.gca()
+ax.yaxis.grid(True)
+ax.xaxis.grid(False)
 plt.show()
 
 
+# Data wrangle for Seaborn since each bar value has to be culmulative of all values below it
 df_cost_sea = df_cost_chart.copy()
 df_cost_sea['Book'] = df_cost_sea['Book'] + df_cost_sea['Tuition (In State)']
 df_cost_sea['Dorm'] = df_cost_sea['Dorm'] + df_cost_sea['Book']
 df_cost_sea['Other'] = df_cost_sea['Other'] + df_cost_sea['Dorm']
-
 
 
 
@@ -327,8 +209,12 @@ b.set_ylabel("Cost ", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
 b.set_title('Median Cost of College', fontdict= { 'fontsize': 16, 'fontweight':'bold'})
 b.yaxis.set_major_formatter(xfmt)
 b.xaxis.grid(False)
-b.yaxis.grid(True) 
-plt.legend(labels=["Legend_Day1","Legend_Day2"], loc = 2, bbox_to_anchor = (0.85,1))
+b.yaxis.grid(True)
+patch_other = mpatches.Patch(color='gray', label='Other')
+patch_dorm = mpatches.Patch(color='green', label='Dorm')
+patch_book = mpatches.Patch(color='skyblue', label='Book')
+patch_tuition = mpatches.Patch(color='orange', label='Tuition')
+plt.legend(handles=[patch_tuition, patch_dorm, patch_book, patch_other], loc = 2, bbox_to_anchor = (0.85,1))
 
 plt.show()
 
