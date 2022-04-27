@@ -16,8 +16,8 @@ def filter_non_numeric(dataframe, convert_columns):
     return dataframe
 
 
-#df = pd.read_csv("https://raw.githubusercontent.com/cliftonleesps/602_adv_prog_tech/main/final_project/df_out.csv")
-df = pd.read_csv("df_out.csv")
+df = pd.read_csv("https://raw.githubusercontent.com/cliftonleesps/602_adv_prog_tech/main/final_project/df_out.csv")
+#df = pd.read_csv("df_out.csv")
 
 
 df_states = df
@@ -93,7 +93,7 @@ plt.title("Public Colleges Tuition for Select States", fontdict= { 'fontsize': 1
 plt.xlabel("Tuition",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
 plt.ylabel("Frequency", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
 Axis.set_major_formatter(ax.xaxis, xfmt)
-Axis.sns.despine(fig=None, ax=None, top=True, right=True, left=False, bottom=False, offset=None, trim=False)¶
+Axis.sns.despine(fig=None, ax=None, top=True, right=True, left=False, bottom=False, offset=None, trim=False)
 
 # Plot 1 - Barplot by states (Seaborn)
 sns.set_theme() #style="whitegrid", palette="pastel")
@@ -157,7 +157,7 @@ plt.title("Public Colleges Tuition for Select States", fontdict= { 'fontsize': 1
 plt.xlabel("Tuition",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
 plt.ylabel("Frequency", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
 Axis.set_major_formatter(ax.xaxis, xfmt)
-Axis.sns.despine(fig=None, ax=None, top=True, right=True, left=False, bottom=False, offset=None, trim=False)¶
+Axis.sns.despine(fig=None, ax=None, top=True, right=True, left=False, bottom=False, offset=None, trim=False)
 
 # Plot 1 - Barplot by states (Seaborn)
 sns.set_theme() #style="whitegrid", palette="pastel")
