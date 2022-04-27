@@ -29,7 +29,7 @@ df_states = df_states[['STABBR']]
 
 # Group by states, sort by count
 result = df_states.groupby(['STABBR'])['STABBR'].size().sort_values(ascending=True)
-sns.despine(fig=None, ax=None, top=True, right=True, left=False, bottom=False, offset=None, trim=False)¶
+sns.despine(fig=None, ax=None, top=True, right=True, left=False, bottom=False, offset=None, trim=False)
 
 # Plot 1 - Barplot by states (Seaborn)
 sns.set_theme() #style="whitegrid", palette="pastel")
