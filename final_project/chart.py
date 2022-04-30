@@ -149,7 +149,7 @@ plt.xlabel('College Type')
 plt.show()
 
 sns.barplot(data=df_cost_chart, x=['Public','Private nonprofit','Private for-profit'], y="Tuition (In State)", color='darksalmon')
-sns.barplot(data=df_cost_chart, x=['Public','Private nonprofit','Private for-profit'], y="Dorm", ci=None, color='lightgrey')
+sns.barplot(data=df_cost_chart, x=['Public','Private nonprofit','Private for-profit'], y="Dorm", color='lightgrey')
 sns.barplot(data=df_cost_chart, x=['Public','Private nonprofit','Private for-profit'], y="Other", color='darkblue')
 sns.barplot(data=df_cost_chart, x=['Public','Private nonprofit','Private for-profit'], y="Book", color='lightblue')
 

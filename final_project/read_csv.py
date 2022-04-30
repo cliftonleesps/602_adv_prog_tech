@@ -20,6 +20,9 @@ def filter_non_numeric(dataframe, convert_columns):
 df = pd.read_csv("https://raw.githubusercontent.com/cliftonleesps/602_adv_prog_tech/main/final_project/df_out.csv")
 #df = pd.read_csv("df_out.csv")
 
+# show the data type
+df.info()
+
 
 df_states = df
 df_states = df_states[df_states['ACCREDAGENCY'].isnull() == False]
@@ -27,20 +30,12 @@ df_states = df_states[df_states['CONTROL'] == 1]
 df_states = df_states[df_states['STABBR'].isin(['NY', 'PA','DE','VA','NJ','CT','RI','MA'])]
 df_states = df_states[['STABBR']]
 
+# Set general theme options
+sns.set_theme() #style="whitegrid", palette="pastel")
+sns.despine(fig=None, ax=None, top=True, right=True, left=False, bottom=False, offset=None, trim=False)
 
 # Group by states, sort by count
 result = df_states.groupby(['STABBR'])['STABBR'].size().sort_values(ascending=True)
-sns.despine(fig=None, ax=None, top=True, right=True, left=False, bottom=False, offset=None, trim=False)
-
-# Plot 1 - Barplot by states (Seaborn)
-sns.set_theme() #style="whitegrid", palette="pastel")
-barplot = sns.barplot(x = result.index, y = result.values)
-barplot.set_xlabel("States",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
-barplot.set_ylabel("Number of Colleges", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
-barplot.set_title('Public Colleges in Select States', fontdict= { 'fontsize': 16, 'fontweight':'bold'})
-barplot.bar_label(barplot.containers[0])
-
-plt.show()
 
 # Plot 1 - Barplot by states (Matplotlib)
 bars = plt.bar(result.index, result.values, color=['blue','burlywood', 'seagreen', 'indianred', 'slateblue', 'sienna', 'orchid', 'grey'])
@@ -49,13 +44,22 @@ plt.title("Public Colleges in Select States", fontdict= { 'fontsize': 16, 'fontw
 plt.xlabel("States",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
 plt.ylabel("Number of Colleges", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
 
-# grids
+# Turn off the x-axis grid
 ax = plt.gca()
 ax.yaxis.grid(True)
 ax.xaxis.grid(False)
 
 plt.show()
 
+
+# Plot 1 - Barplot by states (Seaborn)
+barplot = sns.barplot(x = result.index, y = result.values)
+barplot.set_xlabel("States",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
+barplot.set_ylabel("Number of Colleges", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
+barplot.set_title('Public Colleges in Select States', fontdict= { 'fontsize': 16, 'fontweight':'bold'})
+barplot.bar_label(barplot.containers[0])
+
+plt.show()
 
 
 
@@ -67,6 +71,7 @@ df_histogram['ROOMBOARD_ON'] = df_histogram['ROOMBOARD_ON'].fillna(0)
 # filter out rows with empty tuition
 df_histogram = df_histogram[df_histogram['TUITIONFEE_IN'].isna() == False]
 
+# Define a custom formatter so values in the thousands are converted (e.g. 50k)
 def numfmt(x, pos):
     s = '{}k'.format(int(x / 1000))
     return s
@@ -155,7 +160,6 @@ ax.spines['left'].set_visible(True)
 ax.spines['bottom'].set_visible(True)
 ax.spines[['left','right','bottom','top']].set_color('black')
 ax.set_facecolor('white')
-u, d = np.unique(df_scatter["STABBR"], return_inverse=True)
 ax.legend(handles=[patch_CT,patch_DE,patch_MA,patch_NJ,patch_NY,patch_PA,patch_RI,patch_VA], bbox_to_anchor=(1.02, 1), loc='upper left', borderaxespad=0)
 plt.show()
 
