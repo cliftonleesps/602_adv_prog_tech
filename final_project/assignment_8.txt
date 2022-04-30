@@ -415,6 +415,7 @@ Matplotlib is somewhat akin to programming in Java where the programmer has to w
 
 The one exception to this rule was the stacked bar plots. Submitting a dataframe that separate costs by type and school-type is acceptable to Matplotlib but Seaborn required extra dataframe transformations (each cost amount was relative) otherwise, the plots would be 'hidden' behind each other.
 
+After this exercise and considering my own work experience, I would advise using Seaborn libraries to quickly prototype plots in early drafts with a client. After receiving client feedback or receiving new requirements, deciding on whether to stay with Seaborn or reimplementing with Matplotlib can done later.
 
 # Conclusions
 
