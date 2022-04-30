@@ -268,7 +268,10 @@ Axis.set_major_formatter(ax.xaxis, xfmt)
 Axis.set_major_formatter(ax.yaxis, xfmt)
 ax.spines['left'].set_visible(True)
 ax.spines['bottom'].set_visible(True)
-ax.spines[['left','right','bottom','top']].set_color('black')
+ax.spines['left'].set_color('black')
+ax.spines['right'].set_color('black')
+ax.spines['bottom'].set_color('black')
+ax.spines['top'].set_color('black')
 ax.set_facecolor('white')
 u, d = np.unique(df_scatter["STABBR"], return_inverse=True)
 
@@ -315,15 +318,106 @@ ax.yaxis.grid(True)
 ax.xaxis.grid(False)
 plt.show()
 
-######
+################################################
 
 # Visualizations in Seaborn
 
 ## Barchart of the Number of Colleges Per State
 
+################################################
+barplot = sns.barplot(x = result.index, y = result.values)
+barplot.set_xlabel("States",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
+barplot.set_ylabel("Number of Colleges", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
+barplot.set_title('Public Colleges in Select States', fontdict= { 'fontsize': 16, 'fontweight':'bold'})
+barplot.bar_label(barplot.containers[0])
+
+plt.show()
+################################################
+
+
 ## Histogram of Tuition Amounts
+
+################################################
+sns.set_theme(style="whitegrid", palette="pastel",rc={"axes.spines.left": False, "axes.spines.right": False, "axes.spines.top": False})
+histogram = sns.histplot(data=df_histogram,bins=50, x="TUITIONFEE_IN", color="lightgreen")
+histogram.set_xlabel("Tuition",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
+histogram.set_ylabel("Frequency", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
+histogram.set_title('Public College Tuition for Select States', fontdict= { 'fontsize': 16, 'fontweight':'bold'})
+histogram.xaxis.grid(False) 
+histogram.xaxis.set_major_formatter(xfmt)
+plt.show()
+################################################
+
 
 ## Scatter Plot of Net College Price Vs. Faculty Salary
 
+################################################
+df_scatter = df
+df_scatter = df_scatter[df_scatter['ACCREDAGENCY'].isnull() == False]
+df_scatter = df_scatter[df_scatter['CONTROL'] == 1]
+df_scatter = df_scatter[df_scatter['STABBR'].isin(['NY', 'PA','DE','VA','NJ','CT','RI','MA'])]
+df_scatter = df_scatter[df_scatter['AVGFACSAL'].isna() == False]
+df_scatter = df_scatter[df_scatter['NPT4_PUB'].isna() == False]
+
+scatterplot = sns.scatterplot(data=df_scatter, x="AVGFACSAL", y="NPT4_PUB", hue="STABBR")
+scatterplot.set_xlabel("Faculty Salary Per Month",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
+scatterplot.set_ylabel("Net College Price Per Year ", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
+scatterplot.set_title('Average Net College Price Compared to Average Monthly Teaching Salaries', fontdict= { 'fontsize': 16, 'fontweight':'bold'})
+scatterplot.xaxis.set_major_formatter(xfmt)
+scatterplot.yaxis.set_major_formatter(xfmt)
+plt.legend(bbox_to_anchor=(1.02, 1), loc='upper left', borderaxespad=0)
+plt.show()
+################################################
+
+
+
 ## Stacked Barchart of College Cost Types
 
+################################################
+df_cost_sea = df_cost_chart.copy()
+df_cost_sea['Book'] = df_cost_sea['Book'] + df_cost_sea['Tuition (In State)']
+df_cost_sea['Dorm'] = df_cost_sea['Dorm'] + df_cost_sea['Book']
+df_cost_sea['Other'] = df_cost_sea['Other'] + df_cost_sea['Dorm']
+
+
+
+# Seaborn bar chart
+
+sns.barplot(data=df_cost_sea, x=['Public','Private nonprofit','Private for-profit'], y="Other", color='gray')
+sns.barplot(data=df_cost_sea, x=['Public','Private nonprofit','Private for-profit'], y="Dorm", color='green')
+sns.barplot(data=df_cost_sea, x=['Public','Private nonprofit','Private for-profit'], y="Book", color='skyblue')
+b = sns.barplot(data=df_cost_sea, x=['Public','Private nonprofit','Private for-profit'], y="Tuition (In State)", color='orange')
+
+b.set_xlabel("College Type",  fontdict= { 'fontsize': 12, 'fontweight':'bold'})
+b.set_ylabel("Cost ", fontdict= { 'fontsize': 12, 'fontweight':'bold'})
+b.set_title('Median Cost of College', fontdict= { 'fontsize': 16, 'fontweight':'bold'})
+b.yaxis.set_major_formatter(xfmt)
+b.xaxis.grid(False)
+b.yaxis.grid(True)
+patch_other = mpatches.Patch(color='gray', label='Other')
+patch_dorm = mpatches.Patch(color='green', label='Dorm')
+patch_book = mpatches.Patch(color='skyblue', label='Book')
+patch_tuition = mpatches.Patch(color='orange', label='Tuition')
+plt.legend(handles=[patch_tuition, patch_dorm, patch_book, patch_other], loc = 2, bbox_to_anchor = (0.85,1))
+
+plt.show()
+################################################
+
+
+
+# Differences Between Matplotlib and Seaborn
+
+What immediately jumps out is the number of granular control Matplotlib allows. As long as the graph object is obtained, the list of configurable settings gets to be a bit overwhelming. One of the biggest hurdles in constructing a Matplotlib legend was including all of the necessary libraries and different classes and data structure representing the legend symbols, colors and labels. A lof a flexibility is possibile but many decisions have to be made when using Matplotlib plots.
+
+On the other hand, Seaborn takes a quick and basic approach by providing plot functions with some configuration settings. The idea that Seaborn tries to balance flexibility with usability and ease of use; the Seaborn scatter plot required eight lines of code versus twenty seven for Matplotlib.
+
+Matplotlib is somewhat akin to programming in Java where the programmer has to write a significant amount of 'ceremonial code' before getting to the actual task at hand; brevity is not the point. Using Seaborn is closer to spirit of many scripting languages where speed is valued most.  As long as the required dataframe is supplied to a plot, Seaborn makes it simple to create quick plots.
+
+The one exception to this rule was the stacked bar plots. Submitting a dataframe that separate costs by type and school-type is acceptable to Matplotlib but Seaborn required extra dataframe transformations (each cost amount was relative) otherwise, the plots would be 'hidden' behind each other.
+
+
+# Conclusions
+
+From the few plots, it becomes apparent going to a public college will cut the out of pocket expense for most students by at least half compared to private schools with tuition being the largest differentiator (most other expenses were similar). What is not considered here, however are other important data such as tuition discounts, future earnings from various programs and the amount of typical outstanding loans.  Also, the tuition rates do not readily appear to be related to the average faculty salary. 
+
+Additionally, obtaining similar plots in Matplotlib typically took twice as many lines of code as it would using Seaborn plots. If the requirement for plotting data is a quick presentation, Seaborn is the optimal library. However, if custom design and uniqueness is important, Matplotlib is the better choice for configurable plots.
