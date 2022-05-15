@@ -1,12 +1,11 @@
 import pandas as pd
-import sqlalchemy
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 
 
 
-df = pd.read_csv("Most-Recent-Cohorts-Institution.tmp.csv",
+df = pd.read_csv("Most-Recent-Cohorts-Institution.csv",
               dtype = {
                   'UNITID' : 'int',
                   'OPEID' : 'int',
@@ -3000,7 +2999,27 @@ df = pd.read_csv("Most-Recent-Cohorts-Institution.tmp.csv",
               })
 
 
-
-df_out = df[['UNITID','INSTNM','NOLOAN_YR8_N','NPT4_PUB','STABBR','SCH_DEG','SCHTYPE','CONTROL','ACCREDAGENCY','DEP_DEBT_MDN','CUML_DEBT_N','TUITIONFEE_IN','TUITIONFEE_OUT','BOOKSUPPLY','ROOMBOARD_ON','OTHEREXPENSE_ON','AVGFACSAL']]
-df_out.to_csv('df_out.csv',index=False)
+df_out = df[['UNITID',
+             'INSTNM',
+             'NOLOAN_YR8_N',
+             'OVERALL_YR8_N',
+             'NPT4_PUB',
+             'STABBR',
+             'SCH_DEG',
+             'SCHTYPE',
+             'CONTROL',
+             'ACCREDAGENCY',
+             'GRAD_DEBT_MDN',
+             'DEP_DEBT_MDN',
+             'LO_INC_DEBT_MDN',
+             'MD_INC_DEBT_MDN',
+             'HI_INC_DEBT_MDN',
+             'CUML_DEBT_N',
+             'TUITIONFEE_IN',
+             'TUITIONFEE_OUT',
+             'BOOKSUPPLY',
+             'ROOMBOARD_ON',
+             'OTHEREXPENSE_ON',
+             'AVGFACSAL']]
+df_out.to_csv('df_out_2.csv',index=False)
 
