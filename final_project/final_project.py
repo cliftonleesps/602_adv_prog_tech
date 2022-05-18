@@ -10,10 +10,10 @@ from matplotlib.axis import Axis
 
 
 #df = pd.read_csv("https://raw.githubusercontent.com/cliftonleesps/602_adv_prog_tech/main/final_project/df_out.csv")
-df = pd.read_csv("df_out_2.csv")
+df = pd.read_csv("https://raw.githubusercontent.com/cliftonleesps/602_adv_prog_tech/main/final_project/Most-Recent-Cohorts-Institution_2.csv")
 
 # show the data type
-#df.info()
+df.info()
 
 # subset for nearby, public colleges
 df = df[df['ACCREDAGENCY'].isnull() == False]
@@ -40,6 +40,16 @@ fields = fields[fields['CONTROL'] == 'Public']
 jdf = df.join(fields.set_index('UNITID'), on='UNITID', rsuffix = "_fields")
 
 
+
+# filter out rows where the median earnings are NaN
+jdf = jdf[jdf['EARN_NE_MDN_3YR'].isna() == False]
+
+# convert to float
+jdf = jdf[jdf['EARN_NE_MDN_3YR'].isna() == False]
+jdf['EARN_NE_MDN_3YR'] = jdf['EARN_NE_MDN_3YR'].astype(float)
+
+
+
 #print(jdf.sort_values(ascending=False,by='EARN_MDN_HI_2YR')[['EARN_MDN_HI_2YR', 'INSTNM']].head(20))
 #print(jdf.sort_values(ascending=False,by='EARN_NE_MDN_3YR')[['EARN_NE_MDN_3YR', 'HI_INC_DEBT_MDN', 'NPT4_PUB', 'TUITIONFEE_IN', 'ROOMBOARD_ON', 'INSTNM']].head(20))
 print(jdf.sort_values(ascending=False,by='EARN_NE_MDN_3YR')[['EARN_NE_MDN_3YR', 'HI_INC_DEBT_MDN', 'NPT4_PUB','INSTNM']].head(20))
@@ -47,26 +57,28 @@ print(jdf.sort_values(ascending=False,by='EARN_NE_MDN_3YR')[['EARN_NE_MDN_3YR', 
 
 
 
-color_map = {
-'CT' : '#16697a',
- 'DE' : '#489fb5',
- 'MA' : '#82c0cc',
- 'NJ' : '#fe6d73',
- 'NY' : '#ffa62b',
- 'PA' : '#353535',
- 'RI' : '#aec3b0',
- 'VA' : '#a98467'
-}
-color_array = []
 
-# make a color array mapped to each state
-for s in jdf['STABBR']:
-  color_array.append(color_map[s])
+fig = px.scatter(jdf,
+                 x="EARN_NE_MDN_3YR",
+                 y="GRAD_DEBT_MDN",
+                 color="STABBR",
+                 hover_data=['INSTNM'],
+                 size='EARN_NE_MDN_3YR')
 
-fig = go.Figure(data=go.Scatter(x=jdf['EARN_NE_MDN_3YR'],y=jdf['HI_INC_DEBT_MDN'], mode='markers', marker_color=color_array,text=jdf['INSTNM']))
-fig.update_traces(marker=dict(size=12))
-fig.update_layout(title='Median Annual Earnings Versus Median Debt')
+o = fig.update_xaxes(range=[40000,110000])
+o = fig.update_yaxes(range=[10000, 30000])
+
+o = fig.update_layout(title={ 'text': '<span style="font-size: 2em;"><b>Median Annual Earnings Versus Median Debt</b></span>',
+                              'y':0.95,
+                              'x':0.5,
+                              'xanchor': 'center',
+                              'yanchor': 'top'},
+                      legend_title_text='State',
+                      yaxis_title="<b>Median Debt at Graduation</b>",
+                      xaxis_title="<b>Median Earnings 3 Years After Graduation</b>"
+                      )
 fig.show()
+
 
 
 
