@@ -25,7 +25,7 @@ df['GRAD_DEBT_MDN'] = pd.to_numeric(df['GRAD_DEBT_MDN'])
 df['CUML_DEBT_N'] = pd.to_numeric(df['CUML_DEBT_N'])
 
 
-fields = pd.read_csv("Most-Recent-Cohorts-Field-of-Study.csv")
+fields = pd.read_csv("https://raw.githubusercontent.com/cliftonleesps/602_adv_prog_tech/main/final_project/Most-Recent-Cohorts-Field-of-Study_2.csv")
 fields = fields.replace('PrivacySuppressed', np.nan)
 fields['EARN_MDN_HI_1YR'] = pd.to_numeric(fields['EARN_MDN_HI_1YR'])
 fields['EARN_MDN_HI_2YR'] = pd.to_numeric(fields['EARN_MDN_HI_2YR'])
