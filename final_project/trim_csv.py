@@ -3021,7 +3021,7 @@ df_out = df[['UNITID',
              'ROOMBOARD_ON',
              'OTHEREXPENSE_ON',
              'AVGFACSAL']]
-df_out.to_csv('Most-Recent-Cohorts-Institution_2.csv',index=False)
+df_out.to_csv('df_out_2.csv',index=False)
 
 
 
@@ -3157,6 +3157,9 @@ fields_out = fields[['UNITID',
                      'EARN_NE_MDN_3YR',
                      'CIPCODE',
                      'CONTROL',
-                     'CREDLEV']];
+                     'CREDLEV',
+                     'IPEDSCOUNT1',
+                     'IPEDSCOUNT2',
+                     ]];
 fields_out.to_csv('Most-Recent-Cohorts-Field-of-Study_2.csv',index=False)
 

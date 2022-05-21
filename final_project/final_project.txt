@@ -1,0 +1,22 @@
+
+Introduction
+
+As many people have noticed, the cost of attending college has been steadily rising so rapidly that it outpaces inflation. Unsurprisingly, many students feel a heightened level of anxiety since choosing their field of study and where to attend are their first independent decisions as adults. The probability of having debt before their first job simply adds to their anxiety.
+
+However to help students, the Department of Education publishes public collection of datasets on U.S. colleges called the College Scorecard (https://collegescorecard.ed.gov/data). Along with institutional data, specific data regarding cohorts in specific fields of study can help students gauge their likely future earnings.
+
+As an exercise, we can use this dataset to answer one specific question: what public, four year college has the highest median earnings with the lowest cost of attendance for computer science majors?
+
+
+Justification
+
+As a parent of children heading to college in the next several years, I've had two realizations: college is not very far away; the costs are ever rising at a faster pace. When I attended a state school for college, the tuition was covered with Pell and state grants with a small amount left over for loans. However, with colleges adding more well known names to their faculty and also improving student amenities, the age has passed where a single grant can help cover more than a low percentage of costs.
+
+Even though the DOE dataset has over six thousand colleges and a few thousand columns for the sake of scaling down the data, only colleges with the below criteria are considered:
+
+* Must be a public institution
+* Must be accredited
+* Only the following states are included: Pennsylvania; New York; New Jersey; Virginia; Massachusetts; Rhode Island.
+
+
+With sufficient data cleaned up, wrangling and inspection, typical college costs can presented in a clearer picture. 

@@ -1,0 +1,105 @@
+
+Slide 1
+
+Hello, my name is Cliff Lee and we will be exploring college costs and future earnings
+
+In previous years, students had to consider not only where to go college but also what to study and for many of them, these are their their first big independent decisions of their lives.
+
+Slide 2
+
+
+However between 2009 and 2020, the total cost of attendance saw an increase of 40% at public 4-year schools while private 4-year schools, costs grew 44%.
+
+
+The increasing cost of attendance has changed what used to be a solitary decision to one that has far reaching effects for the students and their families.
+
+
+Slide 3
+
+Fortunately, the Department of Education publishes public datasets on all national colleges. The data is freely available however, in order to extract meaningful data, exploration, wrangling and charting must be done.
+
+Slide 4
+
+As an exercise, we'll see if the College Scorecard data can be used to answer a question:
+
+What public, four-year college has the highest median earnings with the lowest cost of attendance for computer science majors?
+
+If we can answer this question reasonably, we can also expect to answer more difficult and complicated questions.
+
+Slide 5
+
+To help us answer our question, we'll put some additional constraints in our research.
+
+Specifically, all considered colleges
+Must be a public institution
+Must be accredited
+
+And for simplicity's sake we'll only include colleges in the general north east and mid atlantic states
+
+
+Slide 6
+
+All of the college data come in CSV format including institutional, field of study data and a data dictionary.
+
+The two files we'll focus on are the institutional and field of study files.
+
+The Institutional file uniquely identifies each college and contains over 2900 different attributes for more than 6000 colleges.  The major categories are listed here on the left.
+
+The Field of Study file also contains a unique identifier for every college but adds in extra fields for various fields of studies. Additionally, this file contains more granular demographic data for students, debt and aid, etc.
+
+By joining the two datasets, we are able to extract some useful data.
+
+
+Slide 7
+
+Here's a barchart to give us an idea for how many colleges we're looking at.  Pennslyvania and New York have more than twice the number of colleges than all other states. It makes one think a student can have a lot of options just considering these top two or three states.
+
+Slide 8
+
+Here's a histogram of thetuition distribution. It's right skewed but normally distributed with a peak under 10,000 dollars.
+
+Slide 9
+
+Here is a stacked chart of attendance for public, private non profit and private for profit colleges.
+
+We can see that the costs of housing, books and other miscellaneous costs are similar regardless of institution type.
+
+We also notice the biggest differiator is clearly the tuition where private tuitions are at least twice those of public schools.
+
+
+
+# Scatter Plot
+
+We can also plot the median earnings 3 years after graduation versus median debt at graduation.
+
+Most of computer science students earn between 60 and 90 thousand dollars annually with a typical 17 to 26 thousand dollars of debt.
+
+There are a few outliers where some graduates have a higher income like UVA/VA TECH/Stony Brook while other college have an extremely low cost of attendance like Cuny York college and Brooklyn College.
+
+
+Slide 10
+
+The distribution for the graduating classes are show here. It appears most cohorts are less than 100 graduating students.
+
+Slide 11
+
+Here's another summary chart of our findings with one extra calculated column: ratio of earnings to net tuition price (in state).
+
+Even though University of Virginia  graduates earned the highest median income, University of connecticut Waterbury graduates had earnings 10 times more than their debt.
+
+But most college graduates had a earnings that are five times higher than what they owe.
+
+Not too bad.
+
+
+Slide 12
+
+So were we able to use the College Scorecard data and answer a practical question?
+
+Yes! We were!
+
+Could we use this data for other kinds of analysis?
+
+Probably.
+
+
